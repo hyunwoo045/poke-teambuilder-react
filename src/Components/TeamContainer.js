@@ -3,7 +3,6 @@ import SampleCreator from "./TeamContainer/SampleCreator";
 import SampleBox from "./TeamContainer/SampleBox";
 
 function TeamContainer() {
-  const [lastIdx, setLastIdx] = useState(0);
   const [samples, setSamples] = useState([
     {
       id: 0,
@@ -19,15 +18,12 @@ function TeamContainer() {
   return (
     <div id="team-container">
       <SampleCreator
-        idx={lastIdx}
-        onSetSamples={(data, idx) => {
-          const newArr = Array.from(samples);
-          newArr.push(data);
-          setSamples(newArr);
-          setLastIdx(idx);
+        data={samples}
+        onSetSamples={(data) => {
+          setSamples(data);
         }}
       ></SampleCreator>
-      <SampleBox sampleData={samples}></SampleBox>
+      <SampleBox></SampleBox>
     </div>
   );
 }

@@ -2,8 +2,9 @@ import React from "react";
 import "./Style/SampleBox.css";
 
 function SampleBox(props) {
+  const localData = localStorage.getItem("sample");
+  const data = JSON.parse(localData);
   let res = [];
-  const data = props.sampleData;
   const getMovesContent = (moves) => {
     return (
       <div className="sample-moves">

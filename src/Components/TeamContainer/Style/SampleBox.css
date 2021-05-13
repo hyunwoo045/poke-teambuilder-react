@@ -1,18 +1,19 @@
 #samplebox {
-    width: 800px;
+    width: 900px;
     height: 100vh;
-    display: flex;
-    justify-content: row;
+    /* display: flex;
+    justify-content: row; */
     padding: 5px;
 }
 .sample {
-    width: 200px;
-    height: 100px;
+    width: 250px;
+    height: 110px;
     background: powderblue;
     border: 2px solid black;
     text-align: center;
     display: flex;
-    justify-content: row;;
+    justify-content: row;
+    margin: 5px;
 }
 .sample-img {
     width: 100px;

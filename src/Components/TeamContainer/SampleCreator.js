@@ -26,8 +26,9 @@ function SampleCreator(props) {
             alert("Choose Pokemon!!!");
             return;
           }
+          const lastIdx = localStorage.getItem("idx");
           const newSample = {
-            id: props.idx + 1,
+            id: Number(lastIdx) + 1,
             name: sampleData.curName,
             dexnum: sampleData.curDexnum,
             item: sampleData.curItem,
@@ -36,7 +37,12 @@ function SampleCreator(props) {
             evs: sampleData.evs,
             ivs: sampleData.ivs,
           };
-          props.onSetSamples(newSample, props.idx + 1);
+          const localData = localStorage.getItem("sample");
+          const newArr = JSON.parse(localData);
+          newArr.push(newSample);
+          localStorage.setItem("sample", JSON.stringify(newArr));
+          localStorage.setItem("idx", Number(lastIdx) + 1);
+          props.onSetSamples(newArr);
         }}
       >
         박스에 저장하기
