@@ -5,7 +5,7 @@ import ListLoader from "./ListLoader";
 import "./Style/SampleCreator.css";
 import "./Style/ListLoader.css";
 
-function SampleCreator() {
+function SampleCreator(props) {
   const [mode, setMode] = useState("pokename");
   const [sampleData, setSampleData] = useState({
     curName: "",
@@ -18,11 +18,29 @@ function SampleCreator() {
   });
   const [fixedName, setFixedName] = useState();
   const [baseStat, setBaseStat] = useState([100, 100, 100, 100, 100, 100]);
-  console.log(sampleData);
-  console.log(fixedName);
   return (
     <div id="samplecreator">
-      <button>박스에 저장하기</button>
+      <button
+        onClick={() => {
+          if (fixedName === undefined) {
+            alert("Choose Pokemon!!!");
+            return;
+          }
+          const newSample = {
+            id: props.idx + 1,
+            name: sampleData.curName,
+            dexnum: sampleData.curDexnum,
+            item: sampleData.curItem,
+            ability: sampleData.curAbility,
+            moves: sampleData.curMoves,
+            evs: sampleData.evs,
+            ivs: sampleData.ivs,
+          };
+          props.onSetSamples(newSample, props.idx + 1);
+        }}
+      >
+        박스에 저장하기
+      </button>
       <SampleChart
         data={sampleData}
         onSetMode={(m) => {

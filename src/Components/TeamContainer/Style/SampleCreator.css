@@ -7,15 +7,6 @@
     flex-direction: column;
     margin: 5px;
 }
-
-#samplebox {
-    width: 800px;
-    height: 100vh;
-    display: flex;
-    justify-content: space-between;
-    padding: 5px;
-}
-
 #samplechart {
     width: 100%;
     height: 130px;
@@ -54,13 +45,7 @@ td input {
     width:50px;
 }
 
-#samplebox div {
-    width: 100px;
-    height: 100px;
-    background: pink;
-    border: 2px solid black;
-    text-align: center;
-}
+
 #test {
     border: 1px solid red;
     overflow: scroll;

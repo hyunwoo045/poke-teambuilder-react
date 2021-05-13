@@ -49,7 +49,6 @@ function ListLoader(props) {
         className="result"
         key={name}
         onClick={() => {
-          console.log(name);
           props.data.curName = name;
           props.data.curDexnum = dexnum;
           props.onSetData(props);
@@ -161,7 +160,11 @@ function ListLoader(props) {
     let result = [];
     if (props.mode === "pokename") {
       if (props.data.curName === "") {
-        return <li className="result"></li>;
+        return (
+          <li result="result">
+            <span className="err">포켓몬을 고르세요</span>
+          </li>
+        );
       }
       let nameList = Object.keys(Dex);
       for (let i = 0; i < nameList.length; i++) {
@@ -198,7 +201,6 @@ function ListLoader(props) {
       }
       let movelist = Object.values(LearnSet[props.fixedName]);
       const moveIndex = props.mode.split("-")[1];
-      console.log(moveIndex);
       for (let i = 0; i < movelist.length; i++) {
         if (movelist[i].includes(props.data.curMoves[moveIndex])) {
           result.push(getMoveContent(movelist[i], moveIndex));
