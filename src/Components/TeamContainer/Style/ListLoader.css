@@ -1,0 +1,68 @@
+#listloader {
+    overflow: scroll;
+    overflow-x:hidden;
+    margin-bottom: 10px;
+    margin-left: 5px;
+}
+.result {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 45px;
+    font-size: 12px;
+}
+.result:hover {
+    background-color: gray;
+    cursor: pointer;
+}
+.pokename {
+    width: 130px;
+}
+.poketype {
+    width: 75px;
+}
+.poketype img {
+    width: 32px;
+    height: 14px;
+}
+.pokeability, .pokehiddenability {
+    width: 120px;
+    text-align: center;
+    white-space: pre-wrap;
+}
+.pokestat {
+    width: 25px;
+}
+.itemname, .itemname-eng, .itemname-jap {
+    width: 100px;
+}
+.abilitycategory, .abilityname {
+    width: 110px;
+}
+.movename {
+    width: 155px;
+    text-align: left;
+}
+.movetype {
+    width: 35px;
+}
+.movetype img {
+    width: 32px;
+    height: 14px;
+}
+.movecategory {
+    width: 50px;
+}
+.movedamage {
+    width: 30px;
+}
+.moveaccuracy {
+    width: 50px;
+}
+.movepp {
+    width: 30px;
+}
+.moveprior {
+    width: 35px;
+}
