@@ -7,9 +7,6 @@ function App() {
   if (localStorage.getItem("sample") === null) {
     localStorage.setItem("sample", JSON.stringify([]));
   }
-  if (localStorage.getItem("idx") === null) {
-    localStorage.setItem("idx", 0);
-  }
   return (
     <div className="App">
       <Header></Header>

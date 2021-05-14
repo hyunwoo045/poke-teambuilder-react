@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Style/SampleBox.css";
 
 function SampleBox(props) {
+  const [isHovering, setHover] = useState(false);
   const localData = localStorage.getItem("sample");
   const data = JSON.parse(localData);
   let res = [];
@@ -18,7 +19,23 @@ function SampleBox(props) {
   };
   for (let i = 0; i < data.length; i++) {
     res.push(
-      <div className="sample" key={i}>
+      <div
+        className="sample"
+        key={i}
+        onMouseEnter={(e) => {
+          setHover(true);
+          console.log(data[i]);
+        }}
+        onMouseLeave={() => {
+          setHover(false);
+          console.log("mouse leave");
+        }}
+        onClick={() => {
+          let newData = JSON.parse(localData);
+          newData.splice(i, 1);
+          localStorage.setItem("sample", JSON.stringify(newData));
+        }}
+      >
         <div className="sample-img">
           <img src={"sprites/" + data[i].dexnum + ".jpg"} alt=""></img>
         </div>

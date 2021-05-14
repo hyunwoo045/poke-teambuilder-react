@@ -26,9 +26,7 @@ function SampleCreator(props) {
             alert("Choose Pokemon!!!");
             return;
           }
-          const lastIdx = localStorage.getItem("idx");
           const newSample = {
-            id: Number(lastIdx) + 1,
             name: sampleData.curName,
             dexnum: sampleData.curDexnum,
             item: sampleData.curItem,
@@ -41,7 +39,6 @@ function SampleCreator(props) {
           const newArr = JSON.parse(localData);
           newArr.push(newSample);
           localStorage.setItem("sample", JSON.stringify(newArr));
-          localStorage.setItem("idx", Number(lastIdx) + 1);
           props.onSetSamples(newArr);
         }}
       >
