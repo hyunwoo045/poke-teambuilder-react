@@ -1,19 +1,14 @@
 import React from "react";
 import getRVS from "./getRVS";
+import Dex from "./data/pokedex";
 import "./Style/StatTable.css";
 
 function StatTable(props) {
+  const setSample = (key, value) => {
+    props.onSetSample(key, value);
+  };
   const labels = ["HP", "Atk", "Def", "Sp.Atk", "Sp.Def", "Speed"];
-  const setEVS = (idx, val) => {
-    props.evs[idx] = val;
-    props.onChangeEVS(props.evs);
-  };
-
-  const setIVS = (idx, val) => {
-    props.ivs[idx] = val;
-    props.onChangeIVS(props.ivs);
-  };
-
+  const baseStat = Object.values(Dex[props.fixedname]["baseStats"]);
   return (
     <div id="statsetter">
       <div id="column-label">
@@ -26,7 +21,7 @@ function StatTable(props) {
       </div>
       <div id="column-basestat">
         <div>종족값</div>
-        {props.basestat.map((name, i) => (
+        {baseStat.map((name, i) => (
           <div id={"column-basestat-" + i} key={i}>
             <label>{name}</label>
           </div>
@@ -34,13 +29,15 @@ function StatTable(props) {
       </div>
       <div id="column-evs">
         <div>노력치</div>
-        {props.evs.map((name, i) => (
+        {props.data.evs.map((name, i) => (
           <div id={"column-evs-" + i} key={i}>
             <input
               type="text"
               value={name}
               onChange={(e) => {
-                setEVS(i, Number(e.target.value));
+                let newArr = Array.from(props.data.evs);
+                newArr[i] = Number(e.target.value);
+                setSample("evs", newArr);
               }}
             ></input>
           </div>
@@ -48,7 +45,7 @@ function StatTable(props) {
       </div>
       <div id="column-slider">
         <div></div>
-        {props.evs.map((name, i) => (
+        {props.data.evs.map((name, i) => (
           <div id={"column-slider-" + i} key={i}>
             <input
               type="range"
@@ -56,7 +53,9 @@ function StatTable(props) {
               max="252"
               value={name}
               onChange={(e) => {
-                setEVS(i, Number(e.target.value));
+                let newArr = Array.from(props.data.evs);
+                newArr[i] = Number(e.target.value);
+                setSample("evs", newArr);
               }}
             ></input>
           </div>
@@ -64,13 +63,15 @@ function StatTable(props) {
       </div>
       <div id="column-ivs">
         <div>개체값</div>
-        {props.ivs.map((name, i) => (
+        {props.data.ivs.map((name, i) => (
           <div id={"column-ivs-" + i} key={i}>
             <input
               type="text"
               value={name}
               onChange={(e) => {
-                setIVS(i, Number(e.target.value));
+                let newArr = Array.from(props.data.ivs);
+                newArr[i] = Number(e.target.value);
+                setSample("ivs", newArr);
               }}
             ></input>
           </div>
@@ -78,7 +79,7 @@ function StatTable(props) {
       </div>
       <div id="column-rvs">
         <div>실수치</div>
-        {getRVS(props.basestat, props.evs, props.ivs).map((name, i) => (
+        {getRVS(baseStat, props.data.evs, props.data.ivs).map((name, i) => (
           <div id={"column-rvs-" + i} key={i}>
             <label>{name}</label>
           </div>

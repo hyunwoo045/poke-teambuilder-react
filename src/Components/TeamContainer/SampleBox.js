@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Style/SampleBox.css";
-
+import Dex from "./data/pokedex";
 function SampleBox(props) {
-  const [isHovering, setHover] = useState(false);
-  const localData = localStorage.getItem("sample");
-  const data = JSON.parse(localData);
+  const data = props.samplelist;
   let res = [];
   const getMovesContent = (moves) => {
     return (
@@ -22,24 +20,17 @@ function SampleBox(props) {
       <div
         className="sample"
         key={i}
-        onMouseEnter={(e) => {
-          setHover(true);
-          console.log(data[i]);
-        }}
-        onMouseLeave={() => {
-          setHover(false);
-          console.log("mouse leave");
-        }}
         onClick={() => {
-          let newData = JSON.parse(localData);
-          newData.splice(i, 1);
-          localStorage.setItem("sample", JSON.stringify(newData));
+          props.onSetSample(data[i]);
         }}
       >
         <div className="sample-img">
-          <img src={"sprites/" + data[i].dexnum + ".jpg"} alt=""></img>
+          <img
+            src={"sprites/" + Dex[data[i].name]["num"] + ".jpg"}
+            alt=""
+          ></img>
         </div>
-        <div className="sample-item">
+        <div className="sample-info">
           <div>도구: {data[i].item}</div>
           <div>특성: {data[i].ability}</div>
           <div>{getMovesContent(data[i].moves)}</div>

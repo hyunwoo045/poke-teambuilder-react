@@ -5,8 +5,10 @@ import MoveList from "./data/movelist";
 import LearnSet from "./data/learnset";
 
 function ListLoader(props) {
+  const setSample = (key, value) => {
+    props.onSetSample(key, value);
+  };
   const getPokeContent = (name) => {
-    const dexnum = Dex[name]["num"];
     const type = Dex[name]["types"];
     let types = [];
     for (let i = 0; i < type.length; i++) {
@@ -49,11 +51,8 @@ function ListLoader(props) {
         className="result"
         key={name}
         onClick={() => {
-          props.data.curName = name;
-          props.data.curDexnum = dexnum;
-          props.onSetData(props);
-          props.onSetName(name);
-          props.onSetBasestat(basestat);
+          setSample("name", name);
+          props.onSetFixedName(name);
         }}
       >
         <span className="pokename">{name}</span>
@@ -73,7 +72,7 @@ function ListLoader(props) {
         className="result"
         key={name}
         onClick={() => {
-          props.onSetItem(name);
+          setSample("item", name);
         }}
       >
         <span className="itemname">{name}</span>
@@ -102,7 +101,7 @@ function ListLoader(props) {
           className="result"
           key={i}
           onClick={() => {
-            props.onSetAbility(abilityNames[i]);
+            setSample("ability", abilityNames[i]);
           }}
         >
           <span className="abilitycategory">{categoryLabel[i]}</span>
@@ -125,9 +124,9 @@ function ListLoader(props) {
         className="result"
         key={name}
         onClick={() => {
-          let data = props.data.curMoves;
+          let data = props.data.moves;
           data[idx] = name;
-          props.onSetMoves(data);
+          setSample("moves", data);
         }}
       >
         <span className="movename">{name}</span>
@@ -159,26 +158,23 @@ function ListLoader(props) {
   const renderList = () => {
     let result = [];
     if (props.mode === "pokename") {
-      if (props.data.curName === "") {
+      if (props.data.name === "") {
         return (
           <li result="result">
-            <span className="err">포켓몬을 고르세요</span>
+            <span className="err">포켓몬을 검색해보세요!</span>
           </li>
         );
       }
       let nameList = Object.keys(Dex);
       for (let i = 0; i < nameList.length; i++) {
-        if (nameList[i].startsWith(props.data.curName)) {
+        if (nameList[i].startsWith(props.data.name)) {
           result.push(getPokeContent(nameList[i]));
         }
       }
     } else if (props.mode === "item") {
-      // if (props.data.curItem === "") {
-      //   return <li className="result"></li>;
-      // }
       let itemList = Object.keys(ItemList);
       for (let i = 0; i < itemList.length; i++) {
-        if (itemList[i].includes(props.data.curItem)) {
+        if (itemList[i].includes(props.data.item)) {
           result.push(getItemContent(itemList[i]));
         }
       }
@@ -202,7 +198,7 @@ function ListLoader(props) {
       let movelist = Object.values(LearnSet[props.fixedName]);
       const moveIndex = props.mode.split("-")[1];
       for (let i = 0; i < movelist.length; i++) {
-        if (movelist[i].includes(props.data.curMoves[moveIndex])) {
+        if (movelist[i].includes(props.data.moves[moveIndex])) {
           result.push(getMoveContent(movelist[i], moveIndex));
         }
       }

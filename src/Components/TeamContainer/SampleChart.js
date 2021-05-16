@@ -1,6 +1,11 @@
 import React from "react";
+import Dex from "./data/pokedex";
 
 function SampleChart(props) {
+  const setSample = (key, value) => {
+    props.onSetSample(key, value);
+  };
+
   let moveArr = [];
   for (let i = 0; i < 4; i++) {
     moveArr.push(
@@ -9,14 +14,14 @@ function SampleChart(props) {
         placeholder="기술"
         id={"move-" + i}
         key={i}
-        value={props.data.curMoves[i]}
+        value={props.data.moves[i]}
         onClick={(e) => {
           props.onSetMode(e.target.id);
         }}
         onChange={(e) => {
-          let data = Array.from(props.data.curMoves);
-          data[i] = e.target.value;
-          props.onChangeMoves(data);
+          let newMoves = Array.from(props.data.moves);
+          newMoves[i] = e.target.value;
+          setSample("moves", newMoves);
         }}
       ></input>
     );
@@ -26,7 +31,10 @@ function SampleChart(props) {
       <div id="samplechart-left">
         <div id="samplechart-left-top">
           <div id="sampleimg">
-            <img src={"sprites/" + props.data.curDexnum + ".jpg"} alt=""></img>
+            <img
+              src={"sprites/" + Dex[props.fixedname]["num"] + ".jpg"}
+              alt=""
+            ></img>
           </div>
         </div>
         <div id="samplechart-left-bottom">
@@ -34,36 +42,36 @@ function SampleChart(props) {
             id="sample-pokename"
             type="text"
             placeholder="이름"
-            value={props.data.curName}
+            value={props.data.name}
             onClick={() => {
               props.onSetMode("pokename");
             }}
             onChange={(e) => {
-              props.onChangeName(e.target.value);
+              setSample("name", e.target.value);
             }}
           ></input>
           <input
             id="sample-item"
             type="text"
             placeholder="도구"
-            value={props.data.curItem}
+            value={props.data.item}
             onClick={() => {
               props.onSetMode("item");
             }}
             onChange={(e) => {
-              props.onChangeItem(e.target.value);
+              setSample("item", e.target.value);
             }}
           ></input>
           <input
             id="sample-ability"
             type="text"
             placeholder="특성"
-            value={props.data.curAbility}
+            value={props.data.ability}
             onClick={() => {
               props.onSetMode("ability");
             }}
             onChange={(e) => {
-              props.onChangeAbility(e.target.value);
+              setSample("ability", e.target.value);
             }}
           ></input>
         </div>
