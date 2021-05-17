@@ -5,7 +5,7 @@ import SampleBox from "./TeamContainer/SampleBox";
 function TeamContainer() {
   const localData = localStorage.getItem("sample");
   const [curSample, setSample] = useState({
-    name: "",
+    name: "잠만보",
     item: "",
     ability: "",
     moves: ["", "", "", ""],
