@@ -32,8 +32,8 @@ function SampleBox(props) {
         <div>특성: {data.ability}</div>
         <div>
           {data.evs.map((name, i) => {
-            if (i !== 5) return <span>{name}-</span>;
-            else return <span>{name}</span>;
+            if (i !== 5) return <span key={i}>{name}-</span>;
+            else return <span key={i}>{name}</span>;
           })}
         </div>
         <div>{getMovesContent(data.moves)}</div>
@@ -47,6 +47,8 @@ function SampleBox(props) {
         key={i}
         onClick={() => {
           props.onSetSample(data[i]);
+          props.onSetCurIdx(i);
+          props.onSetFixedName(data[i].name);
         }}
         onMouseEnter={() => {
           handleHoverEnter(i);
@@ -71,7 +73,10 @@ function SampleBox(props) {
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                console.log("sample deleted");
+                let newSampleList = Array.from(data);
+                newSampleList.splice(i, 1);
+                props.onSetSampleList(newSampleList);
+                localStorage.setItem("sample", JSON.stringify(newSampleList));
               }}
               className="button-close"
             ></button>
@@ -81,6 +86,28 @@ function SampleBox(props) {
       </div>
     );
   }
-  return <div id="samplebox">{res}</div>;
+  return (
+    <div id="samplebox">
+      {res}
+      <div
+        className="sample"
+        onClick={() => {
+          const emptySample = {
+            name: "",
+            item: "",
+            ability: "",
+            moves: ["", "", "", ""],
+            evs: [0, 0, 0, 0, 0, 0],
+            ivs: [31, 31, 31, 31, 31, 31],
+          };
+          props.onSetSample(emptySample);
+          props.onSetCurIdx(data.length);
+          props.onSetFixedName("missingno");
+        }}
+      >
+        추가하기
+      </div>
+    </div>
+  );
 }
 export default SampleBox;

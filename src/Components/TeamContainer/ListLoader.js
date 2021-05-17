@@ -179,7 +179,7 @@ function ListLoader(props) {
         }
       }
     } else if (props.mode === "ability") {
-      if (props.fixedName === undefined) {
+      if (props.fixedName === "missingno") {
         return (
           <li result="result">
             <span className="err">포켓몬을 먼저 고르세요</span>
@@ -188,7 +188,7 @@ function ListLoader(props) {
       }
       result = getAbilityContent(props.fixedName);
     } else if (props.mode.startsWith("move")) {
-      if (props.fixedName === undefined) {
+      if (props.fixedName === "missingno") {
         return (
           <li result="result">
             <span className="err">포켓몬을 먼저 고르세요</span>

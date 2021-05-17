@@ -7,9 +7,8 @@ import "./Style/ListLoader.css";
 
 function SampleCreator(props) {
   const [mode, setMode] = useState("pokename");
-  const [fixedName, setFixedName] = useState("잠만보");
   const exportToBox = () => {
-    if (fixedName === undefined) {
+    if (props.fixedname === undefined) {
       alert("Choose Pokemon!!!");
       return;
     }
@@ -23,8 +22,13 @@ function SampleCreator(props) {
     };
     const localData = localStorage.getItem("sample");
     const newArr = JSON.parse(localData);
-    newArr.push(newSample);
+    if (props.idx === newArr.length) {
+      newArr.push(newSample);
+    } else {
+      newArr[props.idx] = newSample;
+    }
     props.onSetSampleList(newArr);
+    props.onSetCurIdx(newArr.length);
     localStorage.setItem("sample", JSON.stringify(newArr));
   };
 
@@ -33,7 +37,7 @@ function SampleCreator(props) {
       <button onClick={() => exportToBox()}>박스에 저장하기</button>
       <SampleChart
         data={props.data}
-        fixedname={fixedName}
+        fixedname={props.fixedname}
         onSetMode={(m) => {
           setMode(m);
         }}
@@ -43,7 +47,7 @@ function SampleCreator(props) {
       ></SampleChart>
       <StatTable
         data={props.data}
-        fixedname={fixedName}
+        fixedname={props.fixedname}
         onSetSample={(key, value) => {
           props.onSetSample(key, value);
         }}
@@ -51,12 +55,12 @@ function SampleCreator(props) {
       <ListLoader
         mode={mode}
         data={props.data}
-        fixedName={fixedName}
+        fixedName={props.fixedname}
         onSetSample={(key, value) => {
           props.onSetSample(key, value);
         }}
         onSetFixedName={(name) => {
-          setFixedName(name);
+          props.onSetFixedName(name);
         }}
       ></ListLoader>
     </div>
