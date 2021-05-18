@@ -13,6 +13,7 @@
 src/Components/TeamContainer/data/
 /public/sprites
 /public/type_sprites
+/public/regular
 
 # misc
 .DS_Store

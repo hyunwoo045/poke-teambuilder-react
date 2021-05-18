@@ -59,7 +59,7 @@ function SampleBox(props) {
       >
         <div className="sample-img">
           <img
-            src={"sprites/" + Dex[data[i].name]["num"] + ".jpg"}
+            src={"regular/" + Dex[data[i].name]["name"] + ".png"}
             alt=""
           ></img>
         </div>

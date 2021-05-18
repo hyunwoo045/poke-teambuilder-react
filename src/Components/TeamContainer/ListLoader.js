@@ -55,6 +55,9 @@ function ListLoader(props) {
           props.onSetFixedName(name);
         }}
       >
+        <span className="pokeicon">
+          <img src={"regular/" + Dex[name]["name"] + ".png"} alt=""></img>
+        </span>
         <span className="pokename">{name}</span>
         <span className="poketype">{types}</span>
         <span className="pokeability">{ability}</span>
@@ -155,6 +158,7 @@ function ListLoader(props) {
       </li>
     );
   };
+
   const renderList = () => {
     let result = [];
     if (props.mode === "pokename") {
