@@ -1,8 +1,8 @@
 import React from "react";
-import Dex from "./data/pokedex";
-import ItemList from "./data/items";
-import MoveList from "./data/movelist";
-import LearnSet from "./data/learnset";
+import Dex from "../data/pokedex";
+import ItemList from "../data/items";
+import MoveList from "../data/movelist";
+import LearnSet from "../data/learnset";
 
 function ListLoader(props) {
   const setSample = (key, value) => {

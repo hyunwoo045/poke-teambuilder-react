@@ -1,6 +1,6 @@
 import React from "react";
 import getRVS from "./getRVS";
-import Dex from "./data/pokedex";
+import Dex from "../data/pokedex";
 import "./Style/StatTable.css";
 
 function StatTable(props) {

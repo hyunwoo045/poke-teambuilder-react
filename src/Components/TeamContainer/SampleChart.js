@@ -1,5 +1,5 @@
 import React from "react";
-import Dex from "./data/pokedex";
+import Dex from "../data/pokedex";
 
 function SampleChart(props) {
   const setSample = (key, value) => {
@@ -32,7 +32,9 @@ function SampleChart(props) {
         <div id="samplechart-left-top">
           <div id="sampleimg">
             <img
-              src={"sprites/" + Dex[props.fixedname]["num"] + ".jpg"}
+              src={"regular/" + Dex[props.fixedname]["name"] + ".png"}
+              height="80"
+              width="80"
               alt=""
             ></img>
           </div>

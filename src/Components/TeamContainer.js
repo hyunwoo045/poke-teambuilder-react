@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import SampleCreator from "./TeamContainer/SampleCreator";
-import SampleBox from "./TeamContainer/SampleBox";
+import SampleBox from "./SampleBox/SampleBox";
 
 function TeamContainer() {
   const localData = JSON.parse(localStorage.getItem("sample"));
   const [curIdx, setCurIdx] = useState(localData.length);
-  const [fixedName, setFixedName] = useState(
-    localData[localData.length - 1].name
-  );
+  const [fixedName, setFixedName] = useState(() => {
+    if (localData.length === 0) {
+      return "이상해씨";
+    } else {
+      return localData[localData.length - 1].name;
+    }
+  });
   const [curSample, setSample] = useState(localData[localData.length - 1]);
   const [sampleList, setSampleList] = useState(localData);
   return (
