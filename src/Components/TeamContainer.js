@@ -4,31 +4,39 @@ import SampleBox from "./SampleBox/SampleBox";
 
 function TeamContainer() {
   const localData = JSON.parse(localStorage.getItem("sample"));
-  const [curIdx, setCurIdx] = useState(localData.length);
   const [fixedName, setFixedName] = useState(() => {
     if (localData.length === 0) {
-      return "이상해씨";
+      return "missingno";
     } else {
       return localData[localData.length - 1].name;
     }
   });
-  const [curSample, setSample] = useState(localData[localData.length - 1]);
+  const [curSample, setSample] = useState(() => {
+    if (localData.length === 0) {
+      return { 
+        name: '',
+        ability: '',
+        item: '',
+        evs: [0, 0, 0, 0, 0, 0],
+        ivs: [31,31,31,31,31,31],
+        moves: ['', '' ,'' ,''],
+      }
+    } else {
+      return localData[localData.length - 1];
+    }
+  });
   const [sampleList, setSampleList] = useState(localData);
   return (
     <div id="team-container">
       <SampleCreator
         data={curSample}
         fixedname={fixedName}
-        idx={curIdx}
         onSetSample={(key, value) => {
           setSample({ ...curSample, [key]: value });
         }}
         onSetSampleList={(data) => {
           console.log(data);
           setSampleList(data);
-        }}
-        onSetCurIdx={(idx) => {
-          setCurIdx(idx);
         }}
         onSetFixedName={(name) => {
           setFixedName(name);
@@ -41,9 +49,6 @@ function TeamContainer() {
         }}
         onSetSampleList={(data) => {
           setSampleList(data);
-        }}
-        onSetCurIdx={(idx) => {
-          setCurIdx(idx);
         }}
         onSetFixedName={(name) => {
           setFixedName(name);

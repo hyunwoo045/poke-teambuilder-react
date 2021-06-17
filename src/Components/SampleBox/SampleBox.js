@@ -7,7 +7,7 @@ function SampleBox(props) {
   const [dragging, setDragging] = useState(false);
   const dragSample = useRef();
   const dragNode = useRef();
-  const [curGrpIdx, setGrpIdx] = useState("sample");
+
   const handleDragEnd = () => {
     dragNode.current.removeEventListener("dragend", handleDragEnd);
     dragSample.current = null;
@@ -28,31 +28,35 @@ function SampleBox(props) {
         isDragging={dragging}
         draggingNode={dragNode.current}
         draggingSample={dragSample.current}
-        setTeamList={(sample, Idx) => {
-          const currentItem = sample;
-          console.log(currentItem);
-          console.log(curGrpIdx);
-          setTeamlist((oldList) => {
-            let newList = JSON.parse(JSON.stringify(oldList));
-            if (curGrpIdx === "sample") {
-              let oldSampleList = Array.from(props.samplelist);
-              newList[Idx].samples.splice(
-                0,
-                0,
-                oldSampleList.splice(currentItem.i, 1)[0]
-              );
-              props.onSetSampleList(oldSampleList);
-              localStorage.setItem("sample", JSON.stringify(oldSampleList));
-            }
-            // } else {
-            //   newList[Idx].samples.splice(
-            //     Idx,
-            //     0,
-            //     newList[curGrpIdx].samples.splice(currentItem.i, 1)[0]
-            //   );
-            // }
-            return newList;
-          });
+        setTeamList={(target, params) => {
+          const currentItem = dragSample.current;
+          if (target !== dragNode.current) {
+            setTeamlist((oldList) => {
+              let newList = JSON.parse(JSON.stringify(oldList));
+              if (currentItem.grpIdx === "sample") {
+                let oldSampleList = Array.from(props.samplelist);
+                newList[params.grpIdx].samples.splice(
+                  params.itemIdx,
+                  0,
+                  oldSampleList.splice(currentItem.itemIdx, 1)[0]
+                );
+                props.onSetSampleList(oldSampleList);
+                localStorage.setItem("sample", JSON.stringify(oldSampleList));
+              } else {
+                newList[params.grpIdx].samples.splice(
+                  params.itemIdx,
+                  0,
+                  newList[currentItem.grpIdx].samples.splice(
+                    currentItem.itemIdx,
+                    1
+                  )[0]
+                );
+              }
+              localStorage.setItem("Teamlist", JSON.stringify(newList));
+              dragSample.current = params;
+              return newList;
+            });
+          }
         }}
       ></Team>
     );
@@ -76,9 +80,6 @@ function SampleBox(props) {
             setTimeout(() => {
               setDragging(true);
             });
-          }}
-          onSetGrpIdx={(Idx) => {
-            setGrpIdx(Idx);
           }}
         ></WaitingList>
       }

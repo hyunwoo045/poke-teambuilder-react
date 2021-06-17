@@ -22,13 +22,8 @@ function SampleCreator(props) {
     };
     const localData = localStorage.getItem("sample");
     const newArr = JSON.parse(localData);
-    if (props.idx === newArr.length) {
-      newArr.push(newSample);
-    } else {
-      newArr[props.idx] = newSample;
-    }
+    newArr.push(newSample);
     props.onSetSampleList(newArr);
-    props.onSetCurIdx(newArr.length);
     localStorage.setItem("sample", JSON.stringify(newArr));
   };
 

@@ -6,7 +6,6 @@ function WaitingList(props) {
   const handleDragStart = (e, params) => {
     props.onSetDragSample(params);
     props.onSetDragNode(e.target);
-    props.onSetGrpIdx("sample");
   };
   const handleHoverEnter = (i) => {
     setIsHover(i);
@@ -63,7 +62,7 @@ function WaitingList(props) {
           props.onSetSampleList(newSampleList);
           localStorage.setItem("sample", JSON.stringify(newSampleList));
         }}
-        onDragStart={(e) => handleDragStart(e, { i, curData })}
+        onDragStart={(e) => handleDragStart(e, { grpIdx: "sample", curData })}
       >
         <img
           className="sample-img"
