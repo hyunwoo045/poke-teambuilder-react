@@ -13,14 +13,14 @@ function TeamContainer() {
   });
   const [curSample, setSample] = useState(() => {
     if (localData.length === 0) {
-      return { 
-        name: '',
-        ability: '',
-        item: '',
+      return {
+        name: "",
+        ability: "",
+        item: "",
         evs: [0, 0, 0, 0, 0, 0],
-        ivs: [31,31,31,31,31,31],
-        moves: ['', '' ,'' ,''],
-      }
+        ivs: [31, 31, 31, 31, 31, 31],
+        moves: ["", "", "", ""],
+      };
     } else {
       return localData[localData.length - 1];
     }
@@ -36,7 +36,9 @@ function TeamContainer() {
         }}
         onSetSampleList={(data) => {
           console.log(data);
-          setSampleList(data);
+          setSampleList(() => {
+            return data;
+          });
         }}
         onSetFixedName={(name) => {
           setFixedName(name);
@@ -49,6 +51,7 @@ function TeamContainer() {
         }}
         onSetSampleList={(data) => {
           setSampleList(data);
+          localStorage.setItem("sample", JSON.stringify(data));
         }}
         onSetFixedName={(name) => {
           setFixedName(name);

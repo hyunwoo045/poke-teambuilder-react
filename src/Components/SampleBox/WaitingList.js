@@ -1,45 +1,17 @@
 import Dex from "../data/pokedex";
 import React, { useState } from "react";
+import getHoverSampleData from "./getHoverSampleData";
 
 function WaitingList(props) {
   const [isHover, setIsHover] = useState(-1);
   const handleDragStart = (e, params) => {
-    props.onSetDragSample(params);
-    props.onSetDragNode(e.target);
+    props.onSetDragHandler(e.target, params);
   };
   const handleHoverEnter = (i) => {
     setIsHover(i);
   };
   const handleHoverLeave = () => {
     setIsHover(-1);
-  };
-  const getMovesContent = (moves) => {
-    return (
-      <div className="sample-moves">
-        {moves.map((name, idx) => (
-          <div key={idx} className="sample-move">
-            - {name}
-          </div>
-        ))}
-      </div>
-    );
-  };
-  const getHoverSampleData = (data) => {
-    return (
-      <div className="sample-tooltip">
-        <div>
-          {data.name} @{data.item}
-        </div>
-        <div>특성: {data.ability}</div>
-        <div>
-          {data.evs.map((name, i) => {
-            if (i !== 5) return <span key={i}>{name}-</span>;
-            else return <span key={i}>{name}</span>;
-          })}
-        </div>
-        <div>{getMovesContent(data.moves)}</div>
-      </div>
-    );
   };
   let pokeList = [];
   for (let i = 0; i < props.sampleData.length; i++) {
