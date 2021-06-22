@@ -1,0 +1,53 @@
+#sample-builder-chart {
+  width: 100%;
+  height: 130px;
+  border-bottom: 1px solid gray;
+  display: flex;
+  flex-direction: row;
+}
+#sample-builder {
+  width: 650px;
+  height: 100vh;
+  flex: none; /* 크기 고정 */
+  border-right: 1px solid gray;
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+}
+#sample-builder-chart-left {
+  width: 130px;
+  /* border: 1px solid black; */
+}
+#sample-builder-chart-left-top {
+  height: 95px;
+  margin: 4px;
+}
+#sample-pokename-invalid {
+  border: 2px solid red;
+}
+#sample-builder-chart-snd {
+  width: 130px;
+  /* border: 1px solid blue; */
+}
+#sample-builder-chart-snd-type {
+  height: 95px;
+  margin: 4px;
+}
+#sample-builder-chart-trd {
+  width: 130px;
+  /* border: 1px solid red; */
+}
+#sample-builder-chart-trd-empty {
+  height: 95px;
+  margin: 4px;
+}
+#sample-builder-chart-right {
+  width: 130px;
+  /* border: 1px solid green; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+#sample-builder-chart-right input {
+  margin-bottom: 4px;
+}

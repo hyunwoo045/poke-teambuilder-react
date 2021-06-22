@@ -1,0 +1,11 @@
+.box-group-detail {
+  margin: 5px;
+  width: 800px;
+}
+.box-group-detail-gridbox {
+  margin: 5px;
+  width: 600px;
+  height: 100px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}

@@ -2,7 +2,7 @@ import React from "react";
 
 function Header() {
   return (
-    <div className="header">
+    <div id="header">
       <li>
         <a href="/">샘플</a>
       </li>

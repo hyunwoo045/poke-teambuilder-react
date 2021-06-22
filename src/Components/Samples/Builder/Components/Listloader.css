@@ -1,0 +1,78 @@
+#sample-listloader {
+  overflow: scroll;
+  overflow-x: hidden;
+  margin-bottom: 10px;
+  margin-left: 5px;
+}
+.listloader-result {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 60px;
+  font-size: 12px;
+}
+.listloader-result:hover {
+  background-color: gray;
+  cursor: pointer;
+}
+.result-pokename {
+  width: 130px;
+}
+.result-types {
+  width: 75px;
+}
+.result-types img {
+  width: 32px;
+  height: 14px;
+}
+.result-ability,
+.result-hiddenability {
+  width: 120px;
+  text-align: center;
+  white-space: pre-wrap;
+}
+.result-pokestat {
+  width: 25px;
+}
+.result-itemname,
+.result-itemname-eng,
+.result-itename-jap {
+  width: 100px;
+}
+.result-ability-category,
+.result-ability-name {
+  width: 110px;
+}
+.result-move-name {
+  width: 155px;
+  text-align: left;
+}
+.result-move-type {
+  width: 35px;
+}
+.result-move-type img {
+  width: 32px;
+  height: 14px;
+}
+.result-move-category {
+  width: 50px;
+}
+.result-move-damage {
+  width: 30px;
+}
+.result-move-accuracy {
+  width: 50px;
+}
+.result-move-pp {
+  width: 30px;
+}
+.result-move-priority {
+  width: 35px;
+}
+.column-basestat-high {
+  color: red;
+}
+.column-basestat-low {
+  color: blue;
+}

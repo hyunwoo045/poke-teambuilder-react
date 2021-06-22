@@ -1,0 +1,9 @@
+#sample-builder {
+  width: 650px;
+  height: 100vh;
+  flex: none; /* 크기 고정 */
+  border-right: 1px solid gray;
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+}
