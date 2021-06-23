@@ -1,23 +1,15 @@
 import "./Builder.css";
-import React, { useState } from "react";
+import React, { useState, useReducer } from "react";
 import Samplechart from "./Components/Samplechart";
 import Stattable from "./Components/Stattable";
 import Listloader from "./Components/Listloader";
 import Dex from "../../../data/pokedex";
-
-const emptySample = {
-  name: "",
-  item: "",
-  ability: "",
-  moves: ["", "", "", ""],
-  evs: [0, 0, 0, 0, 0, 0],
-  ivs: [31, 31, 31, 31, 31, 31],
-  character: { high: -1, low: -1 },
-};
+import reducer from "./Reducer";
+import emptySample from "./emptySample";
 
 function Builder(props) {
   const [curMode, setMode] = useState("name");
-  const [curSample, setSample] = useState(emptySample);
+  const [curSample, dispatch] = useReducer(reducer, emptySample());
   const [isProper, setProper] = useState(false);
   return (
     <div id="sample-builder">
@@ -35,8 +27,8 @@ function Builder(props) {
       <button
         onClick={() => {
           setMode("name");
-          setSample(emptySample);
           setProper(false);
+          dispatch({ type: "RESET" });
         }}
       >
         리 셋
@@ -45,11 +37,14 @@ function Builder(props) {
         curSample={curSample}
         isProper={isProper}
         onSetSample={(key, value) => {
-          setSample({ ...curSample, [key]: value });
-          if (key === "name" && Object.keys(Dex).includes(value)) {
+          dispatch({ type: key, value: value });
+          if (key === "NAME_INPUT" && Object.keys(Dex).includes(value)) {
             console.log("Proper name");
             setProper(true);
-          } else if (key === "name" && !Object.keys(Dex).includes(value)) {
+          } else if (
+            key === "NAME_INPUT" &&
+            !Object.keys(Dex).includes(value)
+          ) {
             setProper(false);
           }
         }}
@@ -57,9 +52,7 @@ function Builder(props) {
           setMode(mode);
         }}
         onSetMove={(value, idx) => {
-          let newList = Array.from(curSample.moves);
-          newList[idx] = value;
-          setSample({ ...curSample, moves: newList });
+          dispatch({ type: "MOVES_INPUT", value: value, idx: idx });
         }}
       ></Samplechart>
       <Stattable
@@ -68,45 +61,15 @@ function Builder(props) {
         onSetEvs={(value, idx) => {
           if (value[value.length - 1] === "+" && idx !== 0) {
             value = value.slice(0, -1);
-            let newObj = curSample.character;
-            newObj.high = idx;
-            setSample({ ...curSample, character: newObj });
+            dispatch({ type: "NATURE_INPUT", key: "high", value: idx });
           } else if (value[value.length - 1] === "-" && idx !== 0) {
             value = value.slice(0, -1);
-            let newObj = curSample.character;
-            newObj.low = idx;
-            setSample({ ...curSample, character: newObj });
+            dispatch({ type: "NATURE_INPUT", key: "low", value: idx });
           }
-          if (value > 252) {
-            value = 252;
-          } else if (value < 0 || value === "") {
-            value = 0;
-          }
-          let newList = Array.from(curSample.evs);
-          newList[idx] = Number(value);
-          if (
-            newList.reduce((sum, curVal) => {
-              return sum + Number(curVal);
-            }, 0) > 510
-          ) {
-            newList[idx] = 0;
-            newList[idx] =
-              508 -
-              newList.reduce((sum, curVal) => {
-                return sum + Number(curVal);
-              }, 0);
-          }
-          setSample({ ...curSample, evs: newList });
+          dispatch({ type: "EVS_INPUT", value: value, idx: idx });
         }}
         onSetIvs={(value, idx) => {
-          if (value > 31) {
-            value = 31;
-          } else if (value < 0) {
-            value = 0;
-          }
-          let newList = Array.from(curSample.ivs);
-          newList[idx] = Number(value);
-          setSample({ ...curSample, ivs: newList });
+          dispatch({ type: "IVS_INPUT", value: value, idx: idx });
         }}
       ></Stattable>
 
@@ -115,13 +78,11 @@ function Builder(props) {
         curSample={curSample}
         isProper={isProper}
         onSetSample={(key, value) => {
-          setSample({ ...curSample, [key]: value });
           setProper(true);
+          dispatch(key, value);
         }}
         onSetMove={(value, idx) => {
-          let newList = Array.from(curSample.moves);
-          newList[idx] = value;
-          setSample({ ...curSample, moves: newList });
+          dispatch({ type: "MOVES_INPUT", value: value, idx: idx });
         }}
       ></Listloader>
     </div>

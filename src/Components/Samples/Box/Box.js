@@ -59,9 +59,9 @@ function Box(props) {
               <span
                 key={idx}
                 className={
-                  sample.character.high === idx
+                  sample.nature.high === idx
                     ? "box-sample-nature-high"
-                    : sample.character.low === idx
+                    : sample.nature.low === idx
                     ? "box-sample-nature-low"
                     : "box-sample-nature"
                 }

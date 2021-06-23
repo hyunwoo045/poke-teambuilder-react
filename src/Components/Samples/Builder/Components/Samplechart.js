@@ -25,7 +25,7 @@ function Samplechart(props) {
             placeholder="이름"
             value={props.curSample.name}
             onChange={(e) => {
-              props.onSetSample("name", e.target.value);
+              props.onSetSample("NAME_INPUT", e.target.value);
             }}
             onFocus={() => {
               props.onSetMode("name");
@@ -44,11 +44,11 @@ function Samplechart(props) {
             placeholder="아이템"
             value={props.curSample.item}
             onChange={(e) => {
-              props.onSetSample("item", e.target.value);
+              props.onSetSample("ITEM_INPUT", e.target.value);
             }}
             onFocus={() => {
               props.onSetMode("item");
-              props.onSetSample("item", "");
+              props.onSetSample("ITEM_INPUT", "");
             }}
           ></input>
         </div>
@@ -65,10 +65,10 @@ function Samplechart(props) {
             value={props.curSample.ability}
             onFocus={() => {
               props.onSetMode("ability");
-              props.onSetSample("ability", "");
+              props.onSetSample("ABILITY_INPUT", "");
             }}
             onChange={(e) => {
-              props.onSetSample("ability", e.target.value);
+              props.onSetSample("ABILITY_INPUT", e.target.value);
             }}
           ></input>
         </div>

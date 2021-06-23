@@ -7,20 +7,44 @@ function Teamdetail(group) {
       {group.samples.map((sample, idx) => (
         <div className="box-group-detail-gridbox" key={idx}>
           <div className="box-group-detail-sprite">
-            <div>
-              <img
-                src={"regular/" + Dex[sample.name]["name"] + ".png"}
-                alt=""
-              ></img>
-            </div>
-            <div>{sample.name}</div>
+            <img
+              src={"regular/" + Dex[sample.name]["name"] + ".png"}
+              alt=""
+            ></img>
           </div>
           <div className="box-group-detail-info">
-            <div>{"@" + sample.item}</div>
+            <div>
+              {sample.name} {"@" + sample.item}
+            </div>
+            <div>{sample.ability}</div>
             <div>
               {sample.evs.map((value, idx) => (
-                <span key={idx}>{idx !== 5 ? value + "-" : value}</span>
+                <span key={idx}>
+                  {idx !== 5 ? (
+                    <b>
+                      <b
+                        className={
+                          idx === sample.nature.high
+                            ? "nature-stat-high"
+                            : idx === sample.nature.low
+                            ? "nature-stat-low"
+                            : "nature-stat"
+                        }
+                      >
+                        {value}
+                      </b>
+                      -
+                    </b>
+                  ) : (
+                    <b className="nature-stat-hp">{value}</b>
+                  )}
+                </span>
               ))}
+              <div>
+                {sample.ivs.map((value, idx) => (
+                  <span key={idx}>{idx !== 5 ? value + "-" : value}</span>
+                ))}
+              </div>
             </div>
             <div>
               {sample.moves.map((move, idx) => (

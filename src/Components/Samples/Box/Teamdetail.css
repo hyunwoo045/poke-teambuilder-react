@@ -5,7 +5,16 @@
 .box-group-detail-gridbox {
   margin: 5px;
   width: 600px;
-  height: 100px;
+  height: 150px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+}
+.nature-stat-high {
+  color: red;
+}
+.nature-stat-low {
+  color: blue;
+}
+.box-group-detail-sprite {
+  align-items: center;
 }

@@ -16,7 +16,7 @@ function Listloader(props) {
           key={pokename}
           className="listloader-result"
           onClick={() => {
-            props.onSetSample("name", pokename);
+            props.onSetSample("NAME_INPUT", pokename);
           }}
         >
           <span className="result-pokeicon">
@@ -79,7 +79,7 @@ function Listloader(props) {
           className="listloader-result"
           key={itemname}
           onClick={() => {
-            props.onSetSample("item", itemname);
+            props.onSetSample("ITEM_INPUT", itemname);
           }}
         >
           <span className="result-itemname">{itemname}</span>
@@ -105,7 +105,7 @@ function Listloader(props) {
           <li
             className="listloader-result"
             onClick={() => {
-              props.onSetSample("ability", curAbility["0"]);
+              props.onSetSample("ABILITY_INPUT", curAbility["0"]);
             }}
           >
             <span className="result-ability-category">일반 특성 1</span>
@@ -128,8 +128,8 @@ function Listloader(props) {
             className="listloader-result"
             onClick={() => {
               curAbility["H"] !== undefined
-                ? props.onSetSample("ability", curAbility["H"])
-                : props.onSetSample("ability", "-");
+                ? props.onSetSample("ABILITY_INPUT", curAbility["H"])
+                : props.onSetSample("ABILITY_INPUT", "-");
             }}
           >
             <span className="result-ability-category">숨겨진 특성</span>

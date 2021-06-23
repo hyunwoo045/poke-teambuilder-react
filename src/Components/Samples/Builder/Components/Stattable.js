@@ -22,9 +22,9 @@ function Stattable(props) {
             <div
               key={"bs" + idx}
               className={
-                props.curSample.character.high === idx
+                props.curSample.nature.high === idx
                   ? "column-basestat-high"
-                  : props.curSample.character.low === idx
+                  : props.curSample.nature.low === idx
                   ? "column-basestat-low"
                   : "column-basestat-none"
               }
@@ -83,14 +83,14 @@ function Stattable(props) {
             baseStats,
             props.curSample.evs,
             props.curSample.ivs,
-            props.curSample.character
+            props.curSample.nature
           ).map((value, idx) => (
             <div
               key={"rvs" + idx}
               className={
-                props.curSample.character.high === idx
+                props.curSample.nature.high === idx
                   ? "column-basestat-high"
-                  : props.curSample.character.low === idx
+                  : props.curSample.nature.low === idx
                   ? "column-basestat-low"
                   : "column-basestat-none"
               }
