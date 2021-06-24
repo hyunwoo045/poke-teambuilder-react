@@ -79,7 +79,7 @@ function Builder(props) {
         isProper={isProper}
         onSetSample={(key, value) => {
           setProper(true);
-          dispatch(key, value);
+          dispatch({ type: key, value: value });
         }}
         onSetMove={(value, idx) => {
           dispatch({ type: "MOVES_INPUT", value: value, idx: idx });
