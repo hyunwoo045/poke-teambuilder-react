@@ -36,7 +36,17 @@ function Teamdetail(group) {
                       -
                     </b>
                   ) : (
-                    <b className="nature-stat-hp">{value}</b>
+                    <b
+                      className={
+                        idx === sample.nature.high
+                          ? "nature-stat-high"
+                          : idx === sample.nature.low
+                          ? "nature-stat-low"
+                          : "nature-stat"
+                      }
+                    >
+                      {value}
+                    </b>
                   )}
                 </span>
               ))}
